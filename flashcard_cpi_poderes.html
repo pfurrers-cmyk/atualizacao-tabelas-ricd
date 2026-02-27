@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flashcard – Poderes da CPI</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f0eef8;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    padding: 24px 16px;
+  }
+  .card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 28px rgba(90,60,180,0.14);
+    max-width: 740px;
+    width: 100%;
+    overflow: hidden;
+  }
+  .header {
+    padding: 14px 22px 0;
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    color: #666;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .header span.tag { color: #9b7fd4; font-size: 10px; }
+  .divider { height: 3px; background: linear-gradient(90deg,#7c4dca,#b39ddb); margin: 12px 0 0; }
+
+  .question {
+    padding: 22px 28px 16px;
+    font-size: 17px;
+    font-weight: 700;
+    color: #1a1a2e;
+    text-align: center;
+    line-height: 1.4;
+  }
+
+  /* intro banner */
+  .banner {
+    margin: 0 18px 14px;
+    background: #ede7f6;
+    border-radius: 10px;
+    padding: 10px 18px;
+    font-size: 12.5px;
+    color: #4a2c9a;
+    text-align: center;
+    line-height: 1.5;
+  }
+  .banner strong { color: #6a1b9a; }
+
+  /* two columns */
+  .columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    padding: 0 18px 14px;
+  }
+
+  /* ===== PODE column ===== */
+  .col-pode {
+    background: #f1f8e9;
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .col-title-pode {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #33691e;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .col-pode .row {
+    display: flex;
+    gap: 7px;
+    margin-bottom: 7px;
+    font-size: 12.5px;
+    color: #1b5e20;
+    line-height: 1.45;
+    align-items: flex-start;
+  }
+  .col-pode .row .icon { font-size: 13px; flex-shrink: 0; padding-top: 1px; }
+
+  /* section headers inside pode */
+  .sub-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: #558b2f;
+    margin: 9px 0 4px;
+    padding-left: 2px;
+    border-left: 3px solid #8bc34a;
+    padding-left: 5px;
+  }
+
+  /* ===== NÃO PODE column ===== */
+  .col-naopode {
+    background: #fff3e0;
+    border-radius: 12px;
+    padding: 14px 16px;
+  }
+  .col-title-naopode {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #bf360c;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .col-naopode .row {
+    display: flex;
+    gap: 7px;
+    margin-bottom: 7px;
+    font-size: 12.5px;
+    color: #7f2700;
+    line-height: 1.45;
+    align-items: flex-start;
+  }
+  .col-naopode .row .icon { font-size: 13px; flex-shrink: 0; padding-top: 1px; }
+  .col-naopode .sub-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: #bf360c;
+    margin: 9px 0 4px;
+    border-left: 3px solid #ff7043;
+    padding-left: 5px;
+  }
+
+  /* full-width base legal */
+  .base-legal {
+    margin: 0 18px 14px;
+    background: #e8eaf6;
+    border-radius: 10px;
+    padding: 11px 18px;
+    font-size: 12px;
+    color: #3949ab;
+    line-height: 1.6;
+  }
+  .base-legal .bl-title {
+    font-weight: 800;
+    font-size: 11px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    color: #283593;
+  }
+  .base-legal .refs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+  }
+  .ref-tag {
+    background: #c5cae9;
+    color: #1a237e;
+    font-size: 10.5px;
+    font-weight: 600;
+    border-radius: 6px;
+    padding: 3px 8px;
+  }
+
+  /* alert box */
+  .alert-box {
+    margin: 0 18px 14px;
+    background: #fff8e1;
+    border: 1.5px solid #f9a825;
+    border-radius: 10px;
+    padding: 9px 14px;
+    font-size: 12px;
+    color: #5a4000;
+    line-height: 1.55;
+  }
+  .alert-box strong { color: #f57f17; }
+
+  /* lei seca */
+  .lei-seca {
+    background: #fffde7;
+    border-left: 4px solid #f4c430;
+    border-radius: 0 8px 8px 0;
+    margin: 0 18px 16px;
+    padding: 8px 14px;
+    font-size: 11.5px;
+    color: #5a4a00;
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  @media (max-width: 560px) {
+    .columns { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="card">
+
+  <div class="header">
+    Regimento Interno CD, Regimento Comum CN e Código de Ética
+    <span class="tag">• RICD – RECRIADOS</span>
+  </div>
+  <div class="divider"></div>
+
+  <div class="question">
+    Quais são os poderes de uma CPI na Câmara dos Deputados?<br>
+    <span style="font-size:13px;font-weight:500;color:#555;">O que pode e o que não pode?</span>
+  </div>
+
+  <div class="banner">
+    A CPI tem <strong>poderes de investigação próprios das autoridades judiciais</strong> (art. 58, §3º, CF),<br>
+    mas está limitada pela <strong>cláusula de reserva de jurisdição</strong>.<br>
+    <em style="font-size:11px;">"Pode muito, mas não pode tudo." — STF</em>
+  </div>
+
+  <div class="columns">
+
+    <!-- ====== PODE ====== -->
+    <div class="col-pode">
+      <div class="col-title-pode">✅ PODE</div>
+
+      <div class="sub-label">Art. 36, I–VI, RICD</div>
+
+      <div class="row"><span class="icon">📌</span><span><strong>I</strong> – Requisitar funcionários de outros órgãos</span></div>
+      <div class="row"><span class="icon">📌</span><span><strong>II</strong> – Determinar diligências, ouvir indiciados, inquirir testemunhas e requisitar informações</span></div>
+      <div class="row"><span class="icon">📌</span><span><strong>III</strong> – Incumbir membros de sindicâncias ou diligências</span></div>
+      <div class="row"><span class="icon">📌</span><span><strong>IV</strong> – Deslocar-se a qualquer ponto do território nacional</span></div>
+      <div class="row"><span class="icon">📌</span><span><strong>V</strong> – Estipular prazo para atendimento de providências, sob penas da lei</span></div>
+      <div class="row"><span class="icon">📌</span><span><strong>VI</strong> – Dizer em separado sobre fatos inter-relacionados</span></div>
+
+      <div class="sub-label">Jurisprudência STF</div>
+
+      <div class="row"><span class="icon">🏦</span><span>Quebrar sigilo <strong>bancário, fiscal e de dados</strong> dos investigados (≠ interceptação telefônica)</span></div>
+      <div class="row"><span class="icon">📋</span><span>Convocar <strong>qualquer pessoa</strong>: particulares, servidores, ministros de Estado (para depor como testemunha ou indiciado)</span></div>
+      <div class="row"><span class="icon">🚨</span><span>Efetuar <strong>prisão em flagrante</strong> (prerrogativa de qualquer cidadão — art. 301, CPP)</span></div>
+      <div class="row"><span class="icon">📤</span><span>Encaminhar relatório ao <strong>MP ou PGR</strong> para eventual ação penal/civil</span></div>
+      <div class="row"><span class="icon">⚖️</span><span>Investigar <strong>atuação administrativa atípica</strong> do Judiciário (ex.: licitação fraudulenta de tribunal)</span></div>
+    </div>
+
+    <!-- ====== NÃO PODE ====== -->
+    <div class="col-naopode">
+      <div class="col-title-naopode">🚫 NÃO PODE</div>
+
+      <div class="sub-label">Reserva de Jurisdição — CF/88 + STF</div>
+
+      <div class="row"><span class="icon">🔒</span><span><strong>Decretar prisão preventiva ou temporária</strong> — somente o Judiciário (art. 5º, LXI, CF)</span></div>
+      <div class="row"><span class="icon">🔒</span><span><strong>Interceptação telefônica</strong> — reserva de jurisdição absoluta (art. 5º, XII, CF)</span></div>
+      <div class="row"><span class="icon">🔒</span><span><strong>Busca e apreensão domiciliar</strong> — inviolabilidade do domicílio (art. 5º, XI, CF)</span></div>
+      <div class="row"><span class="icon">🔒</span><span><strong>Indisponibilidade de bens, arresto, sequestro, hipoteca judiciária</strong> — poder geral de cautela exclusivo do Judiciário</span></div>
+      <div class="row"><span class="icon">🔒</span><span><strong>Quebrar sigilo judicial</strong> — processos em segredo de justiça são inacessíveis</span></div>
+      <div class="row"><span class="icon">🔒</span><span><strong>Investigar atos tipicamente jurisdicionais</strong> — viola separação de poderes</span></div>
+
+      <div class="sub-label">Garantias dos Investigados</div>
+
+      <div class="row"><span class="icon">🤐</span><span>Forçar <strong>autoincriminação</strong> — direito ao silêncio é garantido (<em>nemo tenetur se detegere</em>); silêncio não gera prisão</span></div>
+      <div class="row"><span class="icon">👨‍⚖️</span><span>Impedir ou restringir a <strong>atuação do advogado</strong> — Lei 8.906/1994</span></div>
+      <div class="row"><span class="icon">🏛️</span><span>Investigar <strong>atos privados</strong> sem repercussão sobre o interesse público</span></div>
+      <div class="row"><span class="icon">🔁</span><span>Conduzir <strong>investigação genérica</strong> — o objeto deve ser fato determinado e delimitado</span></div>
+    </div>
+
+  </div><!-- /columns -->
+
+  <!-- Atenção: nuances importantes -->
+  <div class="alert-box">
+    ⚠️ <strong>Nuances que o CEBRASPE cobra:</strong><br>
+    • A quebra de <strong>sigilo telefônico</strong> (registros/dados de chamadas) é permitida à CPI —
+    o que é vedado é a <strong>interceptação telefônica</strong> (escuta em tempo real, reserva de jurisdição absoluta).<br>
+    • As restrições de direitos devem ser votadas pela <strong>maioria absoluta</strong> dos membros (princípio da colegialidade — não pode ser ato monocrático do presidente da CPI).<br>
+    • A existência de inquérito/ação penal em andamento <strong>não impede</strong> a CPI de investigar os mesmos fatos (STF, HC 100.341).<br>
+    • Subsidiariamente, aplicam-se as normas do <strong>Código de Processo Penal</strong> (art. 36, parágrafo único, RICD).
+  </div>
+
+  <!-- Base legal -->
+  <div class="base-legal">
+    <div class="bl-title">🏛️ Fundamentos</div>
+    <div class="refs">
+      <span class="ref-tag">Art. 36, I–VI e parágrafo único, RICD</span>
+      <span class="ref-tag">Art. 58, §3º, CF/88</span>
+      <span class="ref-tag">Art. 5º, XI, XII e LXI, CF/88</span>
+      <span class="ref-tag">Lei nº 1.579/1952 (Lei das CPIs)</span>
+      <span class="ref-tag">STF — MS 23.452 (Celso de Mello)</span>
+      <span class="ref-tag">ADPF 395 e 444 (condução coercitiva)</span>
+    </div>
+  </div>
+
+  <div class="lei-seca">
+    📜 <span><strong>Lei Seca:</strong> Art. 36, I a VI e parágrafo único, RICD &nbsp;|&nbsp; Art. 58, §3º, CF &nbsp;|&nbsp; Art. 5º, XI, XII e LXI, CF &nbsp;|&nbsp; Lei 1.579/1952</span>
+  </div>
+
+</div>
+</body>
+</html>
